@@ -34,9 +34,9 @@ function calculate(changedInput) {
     }
 
     if (calculatedLeads || calculatedEmailAccounts || calculatedDomains) {
-        resultList.innerHTML += `<li>Total Leads: ${calculatedLeads || leads}</li>`;
-        resultList.innerHTML += `<li>Total Email Accounts: ${calculatedEmailAccounts}</li>`;
-        resultList.innerHTML += `<li>Total Domains: ${calculatedDomains}</li>`;
+        resultList.innerHTML += `<li>Total Leads: ${calculatedLeads || leads} / month</li>`;
+        resultList.innerHTML += `<li>Total Email Accounts: ${calculatedEmailAccounts} / month</li>`;
+        resultList.innerHTML += `<li>Total Domains: ${calculatedDomains} / month</li>`;
         resultDiv.style.display = 'block';
     } else {
         errorDiv.innerHTML = 'Please provide at least one input value.';
