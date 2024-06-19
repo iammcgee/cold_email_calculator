@@ -3,21 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lead Calculation Tool 2</title>
-    <link rel="stylesheet" href="../styles.css">
+    <title>Email Leads Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Lead Calculation Tool 2</h1>
+    <h1>Email Leads Calculator</h1>
     <form id="calculationForm">
-        <label for="target_emails">Target Usable Emails:</label>
-        <input type="number" id="target_emails" name="target_emails" oninput="calculate()"><br><br>
-        <label for="total_leads">Total Leads Purchased:</label>
-        <input type="number" id="total_leads" name="total_leads" oninput="calculate()"><br><br>
-        <label for="identified_emails">Identified Email Addresses:</label>
-        <input type="number" id="identified_emails" name="identified_emails" oninput="calculate()"><br><br>
-        <label for="usable_emails">Usable Emails After Cleaning:</label>
+        <label for="usable_emails">Target Usable Emails:</label>
         <input type="number" id="usable_emails" name="usable_emails" oninput="calculate()"><br><br>
-        <input type="button" value="Clear" onclick="clearInputs()">
     </form>
     
     <div id="result">
