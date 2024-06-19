@@ -1,7 +1,8 @@
 function calculate() {
-    const leads = document.getElementById('leads').value;
-    const domains = document.getElementById('domains').value;
-    const email_accounts = document.getElementById('email_accounts').value;
+    const targetEmails = document.getElementById('target_emails').value;
+    const totalLeads = document.getElementById('total_leads').value;
+    const identifiedEmails = document.getElementById('identified_emails').value;
+    const usableEmails = document.getElementById('usable_emails').value;
     const resultList = document.getElementById('resultList');
     const resultDiv = document.getElementById('result');
     const errorDiv = document.getElementById('error');
@@ -10,40 +11,43 @@ function calculate() {
     resultDiv.style.display = 'none';
     errorDiv.innerHTML = '';
 
-    const accounts_per_1000_leads = 5;
-    const accounts_per_domain = 2;
+    let percentageUsableEmails = 0;
+    let totalCreditsNeeded = 0;
 
-    if (leads) {
-        const email_accounts_needed = (leads / 1000) * accounts_per_1000_leads;
-        const domains_needed = email_accounts_needed / accounts_per_domain;
+    if (identifiedEmails && usableEmails) {
+        percentageUsableEmails = (usableEmails / identifiedEmails) * 100;
+    }
 
-        resultList.innerHTML += `<li>Email Accounts Needed: ${Math.ceil(email_accounts_needed)}</li>`;
-        resultList.innerHTML += `<li>Domains Needed: ${Math.ceil(domains_needed)}</li>`;
-    } else if (domains) {
-        const total_email_accounts = domains * accounts_per_domain;
-        const leads_targetable = (total_email_accounts / accounts_per_1000_leads) * 1000;
+    if (targetEmails && percentageUsableEmails) {
+        const leadsNeeded = Math.ceil((targetEmails / (percentageUsableEmails / 100)));
+        resultList.innerHTML += `<li>Number of Leads to Purchase: ${leadsNeeded}</li>`;
+    }
 
-        resultList.innerHTML += `<li>Email Accounts: ${Math.floor(total_email_accounts)}</li>`;
-        resultList.innerHTML += `<li>Leads Targetable: ${Math.floor(leads_targetable)}</li>`;
-    } else if (email_accounts) {
-        const leads_targetable = (email_accounts / accounts_per_1000_leads) * 1000;
-        const domains_needed = email_accounts / accounts_per_domain;
+    if (totalLeads && percentageUsableEmails) {
+        const leadsTargetable = (totalLeads * (percentageUsableEmails / 100));
+        resultList.innerHTML += `<li>Leads Targetable: ${Math.floor(leadsTargetable)}</li>`;
+    }
 
-        resultList.innerHTML += `<li>Leads Targetable: ${Math.floor(leads_targetable)}</li>`;
-        resultList.innerHTML += `<li>Domains Needed: ${Math.ceil(domains_needed)}</li>`;
-    } else {
-        errorDiv.innerHTML = 'Please provide at least one input value.';
-        return;
+    if (totalLeads) {
+        const riskPercentage = 100 - percentageUsableEmails;
+        totalCreditsNeeded = Math.ceil((totalLeads * (riskPercentage / 100)) / 1000) * 1000;
+        resultList.innerHTML += `<li>Total Credits Needed: ${totalCreditsNeeded}</li>`;
+    }
+
+    if (identifiedEmails && usableEmails) {
+        resultList.innerHTML += `<li>Percentage of Usable Emails: ${percentageUsableEmails.toFixed(2)}%</li>`;
     }
 
     resultDiv.style.display = 'block';
 }
 
 function clearInputs() {
-    document.getElementById('leads').value = '';
-    document.getElementById('domains').value = '';
-    document.getElementById('email_accounts').value = '';
+    document.getElementById('target_emails').value = '';
+    document.getElementById('total_leads').value = '';
+    document.getElementById('identified_emails').value = '';
+    document.getElementById('usable_emails').value = '';
     document.getElementById('resultList').innerHTML = '';
     document.getElementById('result').style.display = 'none';
     document.getElementById('error').innerHTML = '';
 }
+
