@@ -10,12 +10,11 @@
     <h1>Lead Calculation Tool</h1>
     <form id="calculationForm">
         <label for="leads">Leads to Target:</label>
-        <input type="number" id="leads" name="leads"><br><br>
+        <input type="number" id="leads" name="leads" oninput="calculate()"><br><br>
         <label for="domains">Number of Domains:</label>
-        <input type="number" id="domains" name="domains"><br><br>
+        <input type="number" id="domains" name="domains" oninput="calculate()"><br><br>
         <label for="email_accounts">Number of Email Accounts:</label>
-        <input type="number" id="email_accounts" name="email_accounts"><br><br>
-        <input type="button" value="Calculate" onclick="calculate()">
+        <input type="number" id="email_accounts" name="email_accounts" oninput="calculate()"><br><br>
     </form>
     
     <div id="result">
