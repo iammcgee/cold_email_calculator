@@ -10,13 +10,13 @@
     <h1>Cold Email Marketing Asset Calculator</h1>
     <form id="calculationForm">
         <label for="leads">Number of Leads to Target per Month:</label>
-        <input type="number" id="leads" name="leads" oninput="calculate('leads')"><br><br>
+        <input type="number" id="leads" name="leads" value="0" oninput="calculate('leads')"><br><br>
         
         <label for="domains">Number of Domains Available:</label>
-        <input type="number" id="domains" name="domains" oninput="calculate('domains')"><br><br>
+        <input type="number" id="domains" name="domains" value="0" oninput="calculate('domains')"><br><br>
 
         <label for="email_accounts_per_domain">Number of Email Accounts per Domain:</label>
-        <input type="number" id="email_accounts_per_domain" name="email_accounts_per_domain" value="2" oninput="calculate('email_accounts_per_domain')"><br><br>
+        <input type="number" id="email_accounts_per_domain" name="email_accounts_per_domain" value="0" oninput="calculate('email_accounts_per_domain')"><br><br>
     </form>
     
     <div id="result">
@@ -35,4 +35,5 @@
     </div>
 </body>
 </html>
+
 
