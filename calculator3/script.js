@@ -1,5 +1,6 @@
 function calculate(changedInput) {
     const salesCalls = parseInt(document.getElementById('sales_calls').value) || 0;
+    const conversionRate = parseFloat(document.getElementById('conversion_rate').value) / 100 || 0.02;
     const leads = parseInt(document.getElementById('leads').value) || 0;
     const domains = parseInt(document.getElementById('domains').value) || 0;
     const emailAccountsPerDomain = parseInt(document.getElementById('email_accounts_per_domain').value) || 2;
@@ -13,7 +14,6 @@ function calculate(changedInput) {
     errorDiv.innerHTML = '';
 
     const accountsPer1000Leads = 5;
-    const conversionRate = 0.02; // Assuming 2% conversion rate from leads to sales calls
     const usableEmailPercentage = 0.75; // 75%
     const costPerCredit = 0.002; // $0.002 per credit
 
@@ -49,6 +49,19 @@ function calculate(changedInput) {
             calculatedEmailAccounts = domains * emailAccountsPerDomain;
             calculatedLeads = Math.floor((calculatedEmailAccounts / accountsPer1000Leads) * 1000);
             calculatedSalesCalls = Math.floor(calculatedLeads * conversionRate);
+        }
+        totalEmailAddresses = Math.ceil((calculatedLeads / usableEmailPercentage) / 1000) * 1000;
+        totalCreditsNeeded = Math.ceil(totalEmailAddresses / 1000) * 1000;
+        totalCost = totalCreditsNeeded * costPerCredit;
+    } else if (changedInput === 'conversion_rate' && conversionRate) {
+        if (salesCalls) {
+            calculatedLeads = Math.ceil(salesCalls / conversionRate);
+            calculatedEmailAccounts = Math.ceil((calculatedLeads / 1000) * accountsPer1000Leads);
+            calculatedDomains = Math.ceil(calculatedEmailAccounts / emailAccountsPerDomain);
+        } else if (leads) {
+            calculatedSalesCalls = Math.floor(leads * conversionRate);
+            calculatedEmailAccounts = Math.ceil((leads / 1000) * accountsPer1000Leads);
+            calculatedDomains = Math.ceil(calculatedEmailAccounts / emailAccountsPerDomain);
         }
         totalEmailAddresses = Math.ceil((calculatedLeads / usableEmailPercentage) / 1000) * 1000;
         totalCreditsNeeded = Math.ceil(totalEmailAddresses / 1000) * 1000;
