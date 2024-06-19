@@ -1,8 +1,5 @@
 function calculate() {
-    const targetEmails = document.getElementById('target_emails').value;
-    const totalLeads = document.getElementById('total_leads').value;
-    const identifiedEmails = document.getElementById('identified_emails').value;
-    const usableEmails = document.getElementById('usable_emails').value;
+    const usable_emails = document.getElementById('usable_emails').value;
     const resultList = document.getElementById('resultList');
     const resultDiv = document.getElementById('result');
     const errorDiv = document.getElementById('error');
@@ -11,35 +8,22 @@ function calculate() {
     resultDiv.style.display = 'none';
     errorDiv.innerHTML = '';
 
-    let percentageUsableEmails = 0;
+    const usable_email_percentage = 0.75; // 75%
+    const cost_per_credit = 0.002; // $0.002 per credit
 
-    if (identifiedEmails && usableEmails) {
-        percentageUsableEmails = (usableEmails / identifiedEmails) * 100;
-    }
+    if (usable_emails) {
+        const total_email_addresses = usable_emails / usable_email_percentage;
+        const total_credits_needed = total_email_addresses; // Assuming 1 credit per email verification
+        const total_cost = total_credits_needed * cost_per_credit;
 
-    if (targetEmails && percentageUsableEmails) {
-        const leadsNeeded = Math.ceil((targetEmails / (percentageUsableEmails / 100)));
-        resultList.innerHTML += `<li>Number of Leads to Purchase: ${leadsNeeded}</li>`;
-    } else if (totalLeads && identifiedEmails && usableEmails) {
-        const riskPercentage = 100 - percentageUsableEmails;
-        const totalCreditsNeeded = Math.ceil((totalLeads * (riskPercentage / 100)) / 1000) * 1000;
-        resultList.innerHTML += `<li>Total Credits Needed: ${totalCreditsNeeded}</li>`;
-    } else if (identifiedEmails && usableEmails) {
-        resultList.innerHTML += `<li>Percentage of Usable Emails: ${percentageUsableEmails.toFixed(2)}%</li>`;
+        resultList.innerHTML += `<li>Total Email Addresses Needed: ${Math.ceil(total_email_addresses)}</li>`;
+        resultList.innerHTML += `<li>Total Credits Needed: ${Math.ceil(total_credits_needed)}</li>`;
+        resultList.innerHTML += `<li>Total Cost: $${total_cost.toFixed(2)}</li>`;
     } else {
-        errorDiv.innerHTML = 'Please provide the necessary input values.';
+        errorDiv.innerHTML = 'Please provide the target number of usable emails.';
         return;
     }
 
     resultDiv.style.display = 'block';
 }
 
-function clearInputs() {
-    document.getElementById('target_emails').value = '';
-    document.getElementById('total_leads').value = '';
-    document.getElementById('identified_emails').value = '';
-    document.getElementById('usable_emails').value = '';
-    document.getElementById('resultList').innerHTML = '';
-    document.getElementById('result').style.display = 'none';
-    document.getElementById('error').innerHTML = '';
-}
