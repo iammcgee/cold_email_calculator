@@ -1,6 +1,6 @@
 function calculate(changedInput) {
-    const leads = parseInt(document.getElementById('leads').value);
-    const domains = parseInt(document.getElementById('domains').value);
+    const leads = parseInt(document.getElementById('leads').value) || 0;
+    const domains = parseInt(document.getElementById('domains').value) || 0;
     const emailAccountsPerDomain = parseInt(document.getElementById('email_accounts_per_domain').value) || 2;
 
     const resultList = document.getElementById('resultList');
@@ -42,3 +42,4 @@ function calculate(changedInput) {
         errorDiv.innerHTML = 'Please provide at least one input value.';
     }
 }
+
