@@ -12,16 +12,20 @@ function calculate() {
     resultDiv.style.display = 'none';
     errorDiv.innerHTML = '';
 
+    const cost_per_email_account = 0.002; // $0.002 per email account (example cost)
+
     if (desiredMeetings && conversionRate && emailsPerDomain && emailsPerLead) {
         const totalLeadsNeeded = Math.ceil(desiredMeetings / conversionRate);
         const totalEmailsNeeded = totalLeadsNeeded * emailsPerLead;
         const totalDomainsNeeded = Math.ceil(totalEmailsNeeded / emailsPerDomain);
-        const totalEmailAccountsNeeded = totalEmailsNeeded;
+        const totalEmailAccountsNeeded = Math.ceil(totalEmailsNeeded / 1000) * 1000; // Rounding up to the nearest thousand
+        const totalCost = totalEmailAccountsNeeded * cost_per_email_account;
 
         resultList.innerHTML += `<li>Total Leads Needed: ${totalLeadsNeeded}</li>`;
         resultList.innerHTML += `<li>Total Emails Needed: ${totalEmailsNeeded}</li>`;
         resultList.innerHTML += `<li>Total Domains Needed: ${totalDomainsNeeded}</li>`;
         resultList.innerHTML += `<li>Total Email Accounts Needed: ${totalEmailAccountsNeeded}</li>`;
+        resultList.innerHTML += `<li>Total Cost: $${totalCost.toFixed(2)}</li>`;
     } else {
         errorDiv.innerHTML = 'Please fill in all fields.';
         return;
