@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lead Calculation Tool</title>
-    <link rel="stylesheet" href="../styles.css">
+    <title>Cold Email Marketing Asset Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Lead Calculation Tool</h1>
+    <h1>Cold Email Marketing Asset Calculator</h1>
     <form id="calculationForm">
-        <label for="leads">Leads to Target:</label>
-        <input type="number" id="leads" name="leads" oninput="calculate()"><br><br>
-        <label for="domains">Number of Domains:</label>
-        <input type="number" id="domains" name="domains" oninput="calculate()"><br><br>
-        <label for="email_accounts">Number of Email Accounts:</label>
-        <input type="number" id="email_accounts" name="email_accounts" oninput="calculate()"><br><br>
-        <input type="button" value="Clear" onclick="clearInputs()">
+        <label for="leads">Number of Leads to Target per Month:</label>
+        <input type="number" id="leads" name="leads" oninput="calculate('leads')"><br><br>
+        
+        <label for="domains">Number of Domains Available:</label>
+        <input type="number" id="domains" name="domains" oninput="calculate('domains')"><br><br>
+
+        <label for="email_accounts_per_domain">Number of Email Accounts per Domain:</label>
+        <input type="number" id="email_accounts_per_domain" name="email_accounts_per_domain" value="2" oninput="calculate('email_accounts_per_domain')"><br><br>
     </form>
     
     <div id="result">
@@ -29,8 +30,9 @@
 
     <div class="calculator-links">
         <a href="../index.html" class="cta-button">Back to Main Site</a>
-        <a href="../calculator2/index.html" class="cta-button">Leads Purchasing Calculator</a>
+        <a href="../calculator2/index.html" class="cta-button">Leads-to-Emails-to-Domains Calculator</a>
+        <a href="../calculator3/index.html" class="cta-button">Leads Purchasing Calculator</a>
     </div>
-
 </body>
 </html>
+
