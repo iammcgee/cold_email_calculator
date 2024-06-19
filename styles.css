@@ -90,6 +90,8 @@ input[type="button"]:hover {
     transition: background-color 0.3s ease, transform 0.3s ease;
     display: inline-block; /* Ensure button respects padding and font-size */
     margin: 10px; /* Add margin between buttons */
+    width: 250px; /* Fixed width for uniform button sizes */
+    text-align: center; /* Center the text within the button */
 }
 
 .cta-button:hover {
