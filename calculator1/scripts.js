@@ -39,3 +39,12 @@ function calculate() {
     resultDiv.style.display = 'block';
 }
 
+function clearInputs() {
+    document.getElementById('leads').value = '';
+    document.getElementById('domains').value = '';
+    document.getElementById('email_accounts').value = '';
+    document.getElementById('resultList').innerHTML = '';
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('error').innerHTML = '';
+}
+
