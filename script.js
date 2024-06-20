@@ -30,8 +30,8 @@ function calculate() {
     const emailAccountsNeeded = Math.ceil(totalLeadsNeeded / 1000 * 5);
     const domainsNeeded = Math.ceil(emailAccountsNeeded / 2);
 
-    const totalScrapingCredits = usableLeads * emailScrapingCredit;
-    const totalVerifyingCredits = usableLeads * emailVerifyingCredit;
+    const totalScrapingCredits = usableLeads;
+    const totalVerifyingCredits = totalLeadsNeeded;
 
     const totalDomainCost = domainsNeeded * costPerDomain;
     const totalEmailAccountCost = emailAccountsNeeded * costPerEmailAccount;
@@ -39,8 +39,8 @@ function calculate() {
     const totalZapierCost = zapierCost;
     const totalCalendlyCost = calendlyCost;
     const totalGoogleAdminCost = googleAdminCost;
-    const totalScrapingCost = usableLeads * emailScrapingCredit;
-    const totalVerifyingCost = usableLeads * emailVerifyingCredit;
+    const totalScrapingCost = totalScrapingCredits * emailScrapingCredit;
+    const totalVerifyingCost = totalVerifyingCredits * emailVerifyingCredit;
 
     const totalCost = totalDomainCost + totalEmailAccountCost + totalSmartLeadCost + totalZapierCost + totalCalendlyCost + totalGoogleAdminCost + totalScrapingCost + totalVerifyingCost;
     const potentialRevenue = roi * salesCalls * closeRate; // Assuming 20% close rate
@@ -51,18 +51,17 @@ function calculate() {
         <h2>Results</h2>
         <p>Domains Needed: ${domainsNeeded}</p>
         <p>Email Accounts Needed: ${emailAccountsNeeded}</p>
-        <p>Email Scraping Credits Needed: ${totalScrapingCredits}</p>
-        <p>Email Verification Credits Needed: ${totalVerifyingCredits}</p>
+        <p>Total Email Scraping Credits Needed: ${totalScrapingCredits}</p>
+        <p>Total Email Leads Expected (75% of scraping credits): ${totalScrapingCredits * usableEmailPercentage}</p>
+        <p>Total Email Verification Credits Needed: ${totalVerifyingCredits}</p>
         <p>Total Cost: $${totalCost.toFixed(2)}</p>
-        <p>Total Revenue: $${potentialRevenue.toFixed(2)}</p>
-        <p>Total Profit: $${totalProfit.toFixed(2)}</p>
-        <h2>Conversion KPIs</h2>
-        <p>Leads Needed: ${totalLeadsNeeded}</p>
-        <p>Opens (50% Open Rate): ${totalLeadsNeeded * openRate}</p>
-        <p>Replies (10% Reply Rate): ${totalLeadsNeeded * openRate * replyRate}</p>
-        <p>Interested Replies (25% Interested Reply Rate): ${totalLeadsNeeded * openRate * replyRate * interestedReplyRate}</p>
-        <p>Calls Booked (50% Call Book Rate): ${totalLeadsNeeded * openRate * replyRate * interestedReplyRate * callBookRate}</p>
-        <p>Deals Closed (20% Close Rate): ${totalLeadsNeeded * openRate * replyRate * interestedReplyRate * callBookRate * closeRate}</p>
+        <h2>Target Campaign KPIs</h2>
+        <p>Open rates (50%): ${totalLeadsNeeded * openRate}</p>
+        <p>Reply rate (10%): ${totalLeadsNeeded * openRate * replyRate}</p>
+        <p>Interested reply rate (25%): ${totalLeadsNeeded * openRate * replyRate * interestedReplyRate}</p>
+        <p>Call book rate (50%): ${totalLeadsNeeded * openRate * replyRate * interestedReplyRate * callBookRate}</p>
+        <p>Close rate (20%): ${totalLeadsNeeded * openRate * replyRate * interestedReplyRate * callBookRate * closeRate}</p>
+        <p>Total Revenue based on close rate: $${potentialRevenue.toFixed(2)}</p>
+        <p>Total Profit based on Revenue minus cost of the email assets: $${totalProfit.toFixed(2)}</p>
     `;
 }
-
