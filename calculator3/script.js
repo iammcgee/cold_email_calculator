@@ -16,31 +16,39 @@ function calculate(changedInput) {
     const accountsPer1000Leads = 5;
     const usableEmailPercentage = 0.75; // 75%
     const costPerCredit = 0.002; // $0.002 per credit
+    const domainPrice = 10.37; // $10.37 per domain
+    const emailAccountPrice = 7.68; // $7.68 per email account
 
     let calculatedLeads, calculatedDomains, calculatedEmailAccounts, calculatedSalesCalls;
-    let totalEmailAddresses, totalCreditsNeeded, totalCost;
+    let totalEmailAddresses, totalCreditsNeeded, scrapeCreditsNeeded, verifyCreditsNeeded, totalCost;
 
     if (changedInput === 'sales_calls' && salesCalls) {
         calculatedLeads = Math.ceil(salesCalls / conversionRate);
         calculatedEmailAccounts = Math.ceil((calculatedLeads / 1000) * accountsPer1000Leads);
         calculatedDomains = Math.ceil(calculatedEmailAccounts / emailAccountsPerDomain);
         totalEmailAddresses = Math.ceil((calculatedLeads / usableEmailPercentage) / 1000) * 1000;
-        totalCreditsNeeded = Math.ceil(totalEmailAddresses / 1000) * 1000;
-        totalCost = totalCreditsNeeded * costPerCredit;
+        totalCreditsNeeded = totalEmailAddresses;
+        scrapeCreditsNeeded = totalCreditsNeeded;
+        verifyCreditsNeeded = totalCreditsNeeded;
+        totalCost = (calculatedDomains * domainPrice) + (calculatedEmailAccounts * emailAccountPrice) + (totalCreditsNeeded * costPerCredit * 2);
     } else if (changedInput === 'leads' && leads) {
         calculatedSalesCalls = Math.floor(leads * conversionRate);
         calculatedEmailAccounts = Math.ceil((leads / 1000) * accountsPer1000Leads);
         calculatedDomains = Math.ceil(calculatedEmailAccounts / emailAccountsPerDomain);
         totalEmailAddresses = Math.ceil((leads / usableEmailPercentage) / 1000) * 1000;
-        totalCreditsNeeded = Math.ceil(totalEmailAddresses / 1000) * 1000;
-        totalCost = totalCreditsNeeded * costPerCredit;
+        totalCreditsNeeded = totalEmailAddresses;
+        scrapeCreditsNeeded = totalCreditsNeeded;
+        verifyCreditsNeeded = totalCreditsNeeded;
+        totalCost = (calculatedDomains * domainPrice) + (calculatedEmailAccounts * emailAccountPrice) + (totalCreditsNeeded * costPerCredit * 2);
     } else if (changedInput === 'domains' && domains) {
         calculatedEmailAccounts = domains * emailAccountsPerDomain;
         calculatedLeads = Math.floor((calculatedEmailAccounts / accountsPer1000Leads) * 1000);
         calculatedSalesCalls = Math.floor(calculatedLeads * conversionRate);
         totalEmailAddresses = Math.ceil((calculatedLeads / usableEmailPercentage) / 1000) * 1000;
-        totalCreditsNeeded = Math.ceil(totalEmailAddresses / 1000) * 1000;
-        totalCost = totalCreditsNeeded * costPerCredit;
+        totalCreditsNeeded = totalEmailAddresses;
+        scrapeCreditsNeeded = totalCreditsNeeded;
+        verifyCreditsNeeded = totalCreditsNeeded;
+        totalCost = (domains * domainPrice) + (calculatedEmailAccounts * emailAccountPrice) + (totalCreditsNeeded * costPerCredit * 2);
     } else if (changedInput === 'email_accounts_per_domain' && emailAccountsPerDomain) {
         if (leads) {
             calculatedEmailAccounts = Math.ceil((leads / 1000) * accountsPer1000Leads);
@@ -51,8 +59,10 @@ function calculate(changedInput) {
             calculatedSalesCalls = Math.floor(calculatedLeads * conversionRate);
         }
         totalEmailAddresses = Math.ceil((calculatedLeads / usableEmailPercentage) / 1000) * 1000;
-        totalCreditsNeeded = Math.ceil(totalEmailAddresses / 1000) * 1000;
-        totalCost = totalCreditsNeeded * costPerCredit;
+        totalCreditsNeeded = totalEmailAddresses;
+        scrapeCreditsNeeded = totalCreditsNeeded;
+        verifyCreditsNeeded = totalCreditsNeeded;
+        totalCost = (calculatedDomains * domainPrice) + (calculatedEmailAccounts * emailAccountPrice) + (totalCreditsNeeded * costPerCredit * 2);
     } else if (changedInput === 'conversion_rate' && conversionRate) {
         if (salesCalls) {
             calculatedLeads = Math.ceil(salesCalls / conversionRate);
@@ -64,8 +74,10 @@ function calculate(changedInput) {
             calculatedDomains = Math.ceil(calculatedEmailAccounts / emailAccountsPerDomain);
         }
         totalEmailAddresses = Math.ceil((calculatedLeads / usableEmailPercentage) / 1000) * 1000;
-        totalCreditsNeeded = Math.ceil(totalEmailAddresses / 1000) * 1000;
-        totalCost = totalCreditsNeeded * costPerCredit;
+        totalCreditsNeeded = totalEmailAddresses;
+        scrapeCreditsNeeded = totalCreditsNeeded;
+        verifyCreditsNeeded = totalCreditsNeeded;
+        totalCost = (calculatedDomains * domainPrice) + (calculatedEmailAccounts * emailAccountPrice) + (totalCreditsNeeded * costPerCredit * 2);
     }
 
     if (calculatedLeads || calculatedEmailAccounts || calculatedDomains || calculatedSalesCalls) {
