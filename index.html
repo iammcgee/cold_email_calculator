@@ -3,17 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Calculators</title>
+    <title>Cold Email Marketing Master Calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to McClean Leads Calculators</h1>
-    <div class="calculator-links">
-        <a href="calculator1/index.html" class="cta-button">Leads-to-Emails-to-Domains Calculator</a>
-        <a href="calculator2/index.html" class="cta-button">Leads Purchasing Calculator</a>
-        <a href="calculator3/index.html" class="cta-button">Cold Email Mastery Calculator</a>
+    <h1>Cold Email Marketing Master Calculator</h1>
+    <div class="input-group">
+        <label for="leads">Number of Leads</label>
+        <input type="number" id="leads" placeholder="Enter the number of leads">
     </div>
+    <div class="input-group">
+        <label for="domains">Number of Domains Available</label>
+        <input type="number" id="domains" placeholder="Enter the number of domains">
+    </div>
+    <div class="input-group">
+        <label for="email-accounts">Number of Email Accounts Available</label>
+        <input type="number" id="email-accounts" placeholder="Enter the number of email accounts">
+    </div>
+    <div class="input-group">
+        <label for="budget">Available Budget (USD)</label>
+        <input type="number" id="budget" placeholder="Enter your budget">
+    </div>
+    <div class="input-group">
+        <label for="roi">ROI from One Closed Deal (USD)</label>
+        <input type="number" id="roi" placeholder="Enter the ROI per closed deal">
+    </div>
+    <div class="input-group">
+        <button onclick="calculate()">Calculate</button>
+    </div>
+    <div class="results" id="results"></div>
+    <script src="script.js"></script>
 </body>
 </html>
+
 
 
